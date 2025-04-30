@@ -16,7 +16,11 @@ namespace WandShopService
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("TestDb"), ServiceLifetime.Transient);
+            //builder.Services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("TestDb"), ServiceLifetime.Transient);
+
+            var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+            builder.Services.AddDbContext<DataContext>(options =>
+                options.UseSqlServer(connectionString), ServiceLifetime.Transient);
 
             builder.Services.AddScoped<IWandRepository, WandRepository>();
             builder.Services.AddScoped<IWandService, WandService>();
@@ -53,17 +57,17 @@ namespace WandShopService
 
             app.MapControllers();
 
-            //using (var scope = app.Services.CreateScope())
-            //{
-            //    var db = scope.ServiceProvider.GetRequiredService<DataContext>();
-            //    await db.Database.MigrateAsync();
-            //    var seeder = scope.ServiceProvider.GetRequiredService<IWandSeeder>();
-            //    await seeder.Seed();
-            //}
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<DataContext>();
+                await db.Database.MigrateAsync();
+                var seeder = scope.ServiceProvider.GetRequiredService<IWandSeeder>();
+                await seeder.Seed();
+            }
 
-            var scope = app.Services.CreateScope();
-            var seeder = scope.ServiceProvider.GetRequiredService<IWandSeeder>();
-            await seeder.Seed();
+            //var scope = app.Services.CreateScope();
+            //var seeder = scope.ServiceProvider.GetRequiredService<IWandSeeder>();
+            //await seeder.Seed();
 
             app.Run();
         }
