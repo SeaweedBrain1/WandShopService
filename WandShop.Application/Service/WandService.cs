@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using WandShop.Domain.Models;
+using WandShop.Domain.Models.Dto;
 using WandShop.Domain.Repository;
 
 namespace WandShop.Application.Service;
@@ -24,38 +25,66 @@ public class WandService : IWandService
         //_redisDb = redis.GetDatabase();
     }
 
-    public Wand Add(Wand wand)
+    public GetWandDto Add(CreateWandDto createWandDto)
     {
-        var result = _repository.AddWandAsync(wand).Result;
+        var result = _repository.AddWandAsync(createWandDto.ToWand()).Result;
 
-        return result;
+        return result.ToGetWandDto();
     }
 
-    public async Task<Wand> AddAsync(Wand wand)
+    public async Task<GetWandDto> AddAsync(CreateWandDto createWandDto)
     {
-        var result = await _repository.AddWandAsync(wand);
+        var result = await _repository.AddWandAsync(createWandDto.ToWand());
 
-        return result;
+        return result.ToGetWandDto();
     }
 
-    public async Task<List<Wand>> GetAllAsync()
+    public async Task<GetWandDto> DeleteWand(int id)
+    {
+        var wandToDelete = await GetWandAsync(id);
+        wandToDelete.Deleted = true;
+        await UpdateAsync(wandToDelete.ToUpdateWandDto());
+        return wandToDelete.ToGetWandDto();
+        //var result = await _wandService.UpdateAsync(wand);
+    }
+
+    public async Task<List<GetWandDto>> GetAllAsync()
     {
         var result = await _repository.GetAllWandsAsync();
 
-        return result;
+        return result.Select(w => w.ToGetWandDto()).ToList();
     }
 
-    public async Task<Wand> GetAsync(int id)
+    public async Task<GetWandDto> GetAsync(int id)
+    {
+        var result = await _repository.GetWandAsync(id);
+
+        return result.ToGetWandDto();
+    }
+
+    public async Task<Wand> GetWandAsync(int id)
     {
         var result = await _repository.GetWandAsync(id);
 
         return result;
     }
 
-    public async Task<Wand> UpdateAsync(Wand wand)
+    public async Task<GetWandDto> UpdateAsync(UpdateWandDto updateWandDto)
     {
-        var result = await _repository.UpdateWandAsync(wand);
+        var wand = await _repository.GetWandAsync(updateWandDto.Id);
+        if (wand == null) throw new Exception("Wand not found");
 
-        return result;
+        //if (updateWandDto.WoodType.HasValue) wand.WoodType = updateWandDto.WoodType.Value;
+        //if (updateWandDto.Length.HasValue) wand.Length = updateWandDto.Length.Value;
+        //if (updateWandDto.Core.HasValue) wand.Core = updateWandDto.Core.Value;
+        //if (updateWandDto.Flexibility.HasValue) wand.Flexibility = updateWandDto.Flexibility.Value;
+        //if (updateWandDto.Price.HasValue) wand.Price = updateWandDto.Price.Value;
+
+        var updated = await _repository.UpdateWandAsync(updateWandDto.ToWand(wand));
+        return updated.ToGetWandDto();
+
+        //var result = await _repository.UpdateWandAsync(wand);
+
+        //return result.ToGetWandDto();
     }
 }

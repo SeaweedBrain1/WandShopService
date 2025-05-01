@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WandShop.Application.Service;
 using WandShop.Domain.Models;
+using WandShop.Domain.Models.Dto;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -36,17 +37,17 @@ namespace WandShopService.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] Wand wand)
+        public async Task<ActionResult> Post([FromBody] CreateWandDto createWandDto)
         {
-            var result = await _wandService.AddAsync(wand);
+            var result = await _wandService.AddAsync(createWandDto);
 
             return Ok(result);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] Wand wand)
+        public async Task<ActionResult> Put(int id, [FromBody] UpdateWandDto updateWandDto)
         {
-            var result = await _wandService.UpdateAsync(wand);
+            var result = await _wandService.UpdateAsync(updateWandDto);
 
             return Ok(result);
         }
@@ -54,9 +55,11 @@ namespace WandShopService.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var wand = await _wandService.GetAsync(id);
-            wand.Deleted = true;
-            var result = await _wandService.UpdateAsync(wand);
+            //var wand = await _wandService.GetWandAsync(id);
+            //wand.Deleted = true;
+            //var result = await _wandService.UpdateAsync(wand);
+
+            var result = await _wandService.DeleteWand(id);
 
             return Ok(result);
         }
