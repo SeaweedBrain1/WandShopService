@@ -69,6 +69,13 @@ public class WandService : IWandService
         return result;
     }
 
+    public async Task<List<GetWandDto>> GetWandsByAsync(WandFilterDto filter)
+    {
+        var result = await _repository.GetFilteredWandsAsync(filter);
+
+        return result.Select(w => w.ToGetWandDto()).ToList();
+    }
+
     public async Task<GetWandDto> UpdateAsync(UpdateWandDto updateWandDto)
     {
         var wand = await _repository.GetWandAsync(updateWandDto.Id);

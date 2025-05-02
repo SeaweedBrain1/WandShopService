@@ -17,5 +17,6 @@ namespace WandShop.Application.Service
         Task<GetWandDto> AddAsync(CreateWandDto createWandDto);
         GetWandDto Add(CreateWandDto createWandDto);
         Task<GetWandDto> DeleteWand(int id);
+        Task<List<GetWandDto>> GetWandsByAsync(WandFilterDto filter);
     }
 }

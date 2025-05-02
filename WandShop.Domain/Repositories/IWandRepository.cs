@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WandShop.Domain.Models;
+using WandShop.Domain.Models.Dto;
 
 namespace WandShop.Domain.Repository
 {
@@ -14,6 +15,8 @@ namespace WandShop.Domain.Repository
         Task<Wand> AddWandAsync(Wand wand);
         Task<Wand> UpdateWandAsync(Wand wand);
         Task<List<Wand>> GetAllWandsAsync();
+        Task<List<Wand>> GetFilteredWandsAsync(WandFilterDto filter);
+
         #endregion
 
     }

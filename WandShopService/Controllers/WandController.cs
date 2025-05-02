@@ -36,6 +36,17 @@ namespace WandShopService.Controllers
             return Ok(result);
         }
 
+        [HttpGet("by")]
+        public async Task<ActionResult> GetBy([FromQuery] WandFilterDto filter)
+        {
+            var result = await _wandService.GetWandsByAsync(filter);
+
+            if (result == null || result.Count == 0)
+                return NotFound("No wands found matching the provided filters.");
+
+            return Ok(result);
+        }
+
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] CreateWandDto createWandDto)
         {

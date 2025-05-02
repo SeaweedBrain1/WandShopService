@@ -14,7 +14,8 @@ namespace WandShop.Infrastructure.Converters
         public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             var value = reader.GetString();
-            var normalized = Regex.Replace(value ?? "", @"\s+", "");
+            if (string.IsNullOrEmpty(value)) throw new JsonException($"Invalid value for enum {typeof(T).Name}");
+            var normalized = Regex.Replace(value, @"\s+", "");
             return Enum.TryParse<T>(normalized, ignoreCase: true, out var result)
                 ? result
                 : throw new JsonException($"Invalid value '{value}' for enum {typeof(T).Name}");
