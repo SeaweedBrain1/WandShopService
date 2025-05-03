@@ -39,7 +39,7 @@ namespace WandShop.Domain.Repository
             query = ApplyWoodTypeFilter(query, filter);
             query = ApplyLengthFilter(query, filter);
             query = ApplyFlexibilityFilter(query, filter);
-            //query = ApplyWandCoreFilter(query, filter);
+            query = ApplyWandCoreFilter(query, filter);
 
             return await query.ToListAsync();
         }
@@ -83,11 +83,11 @@ namespace WandShop.Domain.Repository
             return query;
         }
 
-        //private IQueryable<Wand> ApplyWandCoreFilter(IQueryable<Wand> query, WandFilterDto filter)
-        //{
-        //    if (filter.Core.HasValue)
-        //        query = query.Where(w => w.Core == filter.Core.Value);
-        //    return query;
-        //}
+        private IQueryable<Wand> ApplyWandCoreFilter(IQueryable<Wand> query, WandFilterDto filter)
+        {
+            if (filter.Core.HasValue)
+                query = query.Where(w => w.Core == filter.Core.Value);
+            return query;
+        }
     }
 }

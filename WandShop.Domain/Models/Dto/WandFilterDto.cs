@@ -15,7 +15,6 @@ public class WandFilterDto
     public decimal? Length { get; set; }
     public Flexibility? Flexibility { get; set; }
 
-    //[JsonConverter(typeof(JsonEnumDisplayConverter<Core>))]
-    //public Core? Core { get; set; }
+    public WandCore? Core { get; set; }
 }
 
