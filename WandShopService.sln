@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WandShopService", "WandShopService\WandShopService.csproj", "{D3830CFB-A81A-4DE9-A43A-532FD3A63D10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WandShopService", "WandShopService\WandShopService.csproj", "{D3830CFB-A81A-4DE9-A43A-532FD3A63D10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WandShop.Application", "WandShop.Application\WandShop.Application.csproj", "{087633EB-006F-4F0D-8059-BA43393EAD56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WandShop.Application", "WandShop.Application\WandShop.Application.csproj", "{087633EB-006F-4F0D-8059-BA43393EAD56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WandShop.Infrastructure", "WandShop.Infrastructure\WandShop.Infrastructure.csproj", "{67843C28-43A1-4A92-8D3B-E1340569AF0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WandShop.Infrastructure", "WandShop.Infrastructure\WandShop.Infrastructure.csproj", "{67843C28-43A1-4A92-8D3B-E1340569AF0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WandShop.Domain", "WandShop.Domain\WandShop.Domain.csproj", "{6F670DFA-51BB-4A22-B091-5837FBD283E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WandShop.Domain", "WandShop.Domain\WandShop.Domain.csproj", "{6F670DFA-51BB-4A22-B091-5837FBD283E0}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
 EndProject
@@ -17,11 +17,37 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WandShop", "WandShop", "{02
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "User", "User", "{07CE9A10-C178-40C0-B507-A15A63EAB486}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WandUserService", "WandUserService\WandUserService.csproj", "{129745AC-8722-AFA8-D0EF-A31FCA113293}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WandUserService", "WandUserService\WandUserService.csproj", "{129745AC-8722-AFA8-D0EF-A31FCA113293}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WandUser.Domain", "WandUser.Domain\WandUser.Domain.csproj", "{65998E9E-022F-DEF8-FD72-DACC83E4C15A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WandUser.Domain", "WandUser.Domain\WandUser.Domain.csproj", "{65998E9E-022F-DEF8-FD72-DACC83E4C15A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WandUser.Application", "WandUser.Application\WandUser.Application.csproj", "{9E933187-AEED-9E7A-F963-77B9783BC2E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WandUser.Application", "WandUser.Application\WandUser.Application.csproj", "{9E933187-AEED-9E7A-F963-77B9783BC2E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A3BC91D0-BAEE-4628-8EB5-6F3049333CB8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WandShopService.Tests", "TestProject1\WandShopService.Tests.csproj", "{164CDF85-45D8-4BC3-B863-550444C3FD4A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D3830CFB-A81A-4DE9-A43A-532FD3A63D10} = {D3830CFB-A81A-4DE9-A43A-532FD3A63D10}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WandUserApplication.Tests", "..\TestProject1\WandUserApplication.Tests.csproj", "{75F36996-2C11-4E8C-9293-DBCB45088FBF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{087633EB-006F-4F0D-8059-BA43393EAD56} = {087633EB-006F-4F0D-8059-BA43393EAD56}
+		{6F670DFA-51BB-4A22-B091-5837FBD283E0} = {6F670DFA-51BB-4A22-B091-5837FBD283E0}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{564A5A7B-8B26-4B0D-BBA4-9572B72984E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "IntegrationTests", "{722B6442-B395-41F0-B6C7-A85834B12244}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controllers", "Controllers", "{B4D3EF54-21B5-42B8-97BA-F0C138431B3D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WandShopService.IntegrationTests", "..\WandShopService.IntegrationTests\WandShopService.IntegrationTests.csproj", "{7BE7E559-AF32-4E20-9E8F-E3994D40FC0C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{942ABA8D-409D-422D-9293-FA2F2C6C154F}"
+	ProjectSection(SolutionItems) = preProject
+		test.runsettings = test.runsettings
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,18 +87,34 @@ Global
 		{9E933187-AEED-9E7A-F963-77B9783BC2E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E933187-AEED-9E7A-F963-77B9783BC2E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E933187-AEED-9E7A-F963-77B9783BC2E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{164CDF85-45D8-4BC3-B863-550444C3FD4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{164CDF85-45D8-4BC3-B863-550444C3FD4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{164CDF85-45D8-4BC3-B863-550444C3FD4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{164CDF85-45D8-4BC3-B863-550444C3FD4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75F36996-2C11-4E8C-9293-DBCB45088FBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75F36996-2C11-4E8C-9293-DBCB45088FBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75F36996-2C11-4E8C-9293-DBCB45088FBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75F36996-2C11-4E8C-9293-DBCB45088FBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BE7E559-AF32-4E20-9E8F-E3994D40FC0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BE7E559-AF32-4E20-9E8F-E3994D40FC0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BE7E559-AF32-4E20-9E8F-E3994D40FC0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BE7E559-AF32-4E20-9E8F-E3994D40FC0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{D3830CFB-A81A-4DE9-A43A-532FD3A63D10} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
-		{087633EB-006F-4F0D-8059-BA43393EAD56} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{67843C28-43A1-4A92-8D3B-E1340569AF0D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{6F670DFA-51BB-4A22-B091-5837FBD283E0} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{129745AC-8722-AFA8-D0EF-A31FCA113293} = {07CE9A10-C178-40C0-B507-A15A63EAB486}
 		{65998E9E-022F-DEF8-FD72-DACC83E4C15A} = {07CE9A10-C178-40C0-B507-A15A63EAB486}
 		{9E933187-AEED-9E7A-F963-77B9783BC2E3} = {07CE9A10-C178-40C0-B507-A15A63EAB486}
+		{164CDF85-45D8-4BC3-B863-550444C3FD4A} = {564A5A7B-8B26-4B0D-BBA4-9572B72984E1}
+		{75F36996-2C11-4E8C-9293-DBCB45088FBF} = {564A5A7B-8B26-4B0D-BBA4-9572B72984E1}
+		{564A5A7B-8B26-4B0D-BBA4-9572B72984E1} = {A3BC91D0-BAEE-4628-8EB5-6F3049333CB8}
+		{722B6442-B395-41F0-B6C7-A85834B12244} = {A3BC91D0-BAEE-4628-8EB5-6F3049333CB8}
+		{B4D3EF54-21B5-42B8-97BA-F0C138431B3D} = {722B6442-B395-41F0-B6C7-A85834B12244}
+		{7BE7E559-AF32-4E20-9E8F-E3994D40FC0C} = {B4D3EF54-21B5-42B8-97BA-F0C138431B3D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6C43B6DE-1D42-4D68-881E-301ABF5F808A}
