@@ -6,20 +6,21 @@ services:
       dockerfile: WandShopService/Dockerfile
     depends_on:
       - db
+      - wanduserservice
     environment:
       - CONNECTION_STRING=Server=${DB_HOST};Database=${DB_NAME};User Id=${DB_USER};Password=${SA_PASSWORD};Encrypt=False;TrustServerCertificate=True;
     ports:
       - "5000:5000"
 
-  # wanduserservice:
-  #   image: ${DOCKER_REGISTRY-}wanduserservice
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     - CONNECTION_STRING=Server=${DB_HOST};Database=${DB_NAME};User Id=${DB_USER};Password=${SA_PASSWORD};Encrypt=False;TrustServerCertificate=True;
-  #   build:
-  #     context: .
-  #     dockerfile: WandUserService/Dockerfile
+  wanduserservice:
+    image: ${DOCKER_REGISTRY-}wanduserservice
+    depends_on:
+      - db
+    environment:
+      - CONNECTION_STRING=Server=${DB_HOST};Database=${DB_NAME};User Id=${DB_USER};Password=${SA_PASSWORD};Encrypt=False;TrustServerCertificate=True;
+    build:
+      context: .
+      dockerfile: WandUserService/Dockerfile
 
   db:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -30,6 +31,12 @@ services:
       - "1433:1433"
     volumes:
       - mssql_wands_data:/var/opt/mssql
+
+  # redis:
+  #   image: redis:latest
+  #   container_name: redis
+  #   ports:
+  #     - "6379:6379"
 
 volumes:
   mssql_wands_data:

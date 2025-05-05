@@ -1,11 +1,19 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using WandUser.Application.Service;
 using WandUser.Domain.Model.JWT;
+using WandUser.Domain.Repositories;
+using WandUser.Domain.Security;
+using WandUser.Domain.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+builder.Services.AddDbContext<DataContext>(options =>
+                options.UseSqlServer(connectionString), ServiceLifetime.Transient);
 
 // JWT config
 var jwtSettings = builder.Configuration.GetSection("Jwt");
@@ -76,6 +84,11 @@ builder.Services.AddSwaggerGen(c =>
             });
 });
 
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
+builder.Services.AddScoped<IUserRoleSeeder, UserRoleSeeder>();
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -91,5 +104,13 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<DataContext>();
+    await db.Database.MigrateAsync();
+    var seeder = scope.ServiceProvider.GetRequiredService<IUserRoleSeeder>();
+    await seeder.Seed();
+}
 
 app.Run();
