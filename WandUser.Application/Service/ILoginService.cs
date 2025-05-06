@@ -8,5 +8,5 @@ namespace WandUser.Application.Service;
 
 public interface ILoginService
 {
-    string Login(string username, string password);
+    Task<string> LoginAsync(string username, string password);
 }
