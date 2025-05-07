@@ -12,7 +12,7 @@ namespace WandShop.Application.Service
     {
         public Task<List<GetWandDto>> GetAllAsync();
         Task<GetWandDto> GetAsync(int id);
-        Task<Wand> GetWandAsync(int id);
+        //Task<Wand> GetWandAsync(int id);
         Task<GetWandDto> UpdateAsync(UpdateWandDto updateWandDto);
         Task<GetWandDto> AddAsync(CreateWandDto createWandDto);
         GetWandDto Add(CreateWandDto createWandDto);

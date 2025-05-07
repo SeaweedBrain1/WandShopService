@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,14 @@ public class WandService : IWandService
 {
     private IWandRepository _repository;
     //private readonly IMemoryCache _cache;
-    //private readonly IDatabase _redisDb;
+    private readonly IDatabase _redisDb;
 
     public WandService(IWandRepository repository/*, IMemoryCache cache*/)
     {
         _repository = repository;
         //_cache = cache;
-        //var redis = ConnectionMultiplexer.Connect("localhost:6379");
-        //_redisDb = redis.GetDatabase();
+        var redis = ConnectionMultiplexer.Connect("redis:6379");
+        _redisDb = redis.GetDatabase();
     }
 
     public GetWandDto Add(CreateWandDto createWandDto)
@@ -57,16 +58,8 @@ public class WandService : IWandService
 
     public async Task<GetWandDto> GetAsync(int id)
     {
-        var result = await _repository.GetWandAsync(id);
-
+        var result = await GetWandAsync(id);
         return result.ToGetWandDto();
-    }
-
-    public async Task<Wand> GetWandAsync(int id)
-    {
-        var result = await _repository.GetWandAsync(id);
-
-        return result;
     }
 
     public async Task<List<GetWandDto>> GetWandsByAsync(WandFilterDto filter)
@@ -93,5 +86,27 @@ public class WandService : IWandService
         //var result = await _repository.UpdateWandAsync(wand);
 
         //return result.ToGetWandDto();
+    }
+
+    private async Task<Wand> GetWandAsync(int id)
+    {
+        var key = $"wand:{id}";
+        var redisValue = await _redisDb.StringGetAsync(key);
+        Wand? wand = null;
+
+        if (redisValue.HasValue)
+            wand = JsonSerializer.Deserialize<Wand>(redisValue);
+
+        if (wand == null)
+        {
+            wand = await _repository.GetWandAsync(id);
+            if (wand != null)
+                await _redisDb.StringSetAsync(key, JsonSerializer.Serialize(wand), TimeSpan.FromDays(1));
+        }
+
+
+        //var result = await _repository.GetWandAsync(id);
+
+        return wand;
     }
 }
