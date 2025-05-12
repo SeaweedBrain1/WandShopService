@@ -20,16 +20,43 @@ namespace WandShop.Domain.Seeders
 
         public async Task Seed()
         {
+            //_context.Wands.RemoveRange(_context.Wands);
+            //await _context.SaveChangesAsync();
+
+            if (!_context.Flexibilities.Any())
+            {
+                var flexibilities = new List<Flexibility>
+                {
+                    new Flexibility { Name = "Supple" },
+                    new Flexibility { Name = "Rigid" },
+                    new Flexibility { Name = "SlightlyRigid" },
+                    new Flexibility { Name = "VeryFlexible" }
+                };
+
+                _context.Flexibilities.AddRange(flexibilities);
+                await _context.SaveChangesAsync();
+            }
+
+            var supple = _context.Flexibilities.First(f => f.Name == "Supple");
+            var rigid = _context.Flexibilities.First(f => f.Name == "Rigid");
+            var slightlyRigid = _context.Flexibilities.First(f => f.Name == "SlightlyRigid");
+            var veryFlexible = _context.Flexibilities.First(f => f.Name == "VeryFlexible");
+
             if (!_context.Wands.Any())
             {
+
+
                 var wands = new List<Wand>
                 {
+
+
                     new Wand
                     {
                         WoodType = WoodType.Holly,
                         Length = 12.5m,
                         Core = WandCore.PhoenixFeather,
-                        Flexibility = Flexibility.Supple,
+                        FlexibilityId = supple.Id,
+                        Flexibility = supple,
                         Price = 250.00m
                     },
                     new Wand
@@ -37,7 +64,8 @@ namespace WandShop.Domain.Seeders
                         WoodType = WoodType.Yew,
                         Length = 14.0m,
                         Core = WandCore.DragonHeartstring,
-                        Flexibility = Flexibility.Rigid,
+                        FlexibilityId = rigid.Id,
+                        Flexibility = rigid,
                         Price = 300.00m
                     },
                     new Wand
@@ -45,7 +73,8 @@ namespace WandShop.Domain.Seeders
                         WoodType = WoodType.Oak,
                         Length = 13.0m,
                         Core = WandCore.UnicornHair,
-                        Flexibility = Flexibility.SlightlyRigid,
+                        FlexibilityId = slightlyRigid.Id,
+                        Flexibility = slightlyRigid,
                         Price = 270.00m
                     },
                     new Wand
@@ -53,7 +82,8 @@ namespace WandShop.Domain.Seeders
                         WoodType = WoodType.Willow,
                         Length = 15.5m,
                         Core = WandCore.ThestralTailHair,
-                        Flexibility = Flexibility.VeryFlexible,
+                        FlexibilityId = veryFlexible.Id,
+                        Flexibility = veryFlexible,
                         Price = 350.00m
                     }
                 };

@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using WandShop.Application.Service;
 using WandShop.Domain.Enums;
+using WandShop.Domain.Models;
 using WandShop.Domain.Repositories;
 using WandShop.Domain.Repository;
 using WandShop.Domain.Seeders;
@@ -65,14 +66,15 @@ namespace WandShopService
             });
 
             builder.Services.AddScoped<IWandRepository, WandRepository>();
+            builder.Services.AddScoped<IFlexibilityRepository, FlexibilityRepository>();
             builder.Services.AddScoped<IWandService, WandService>();
+            builder.Services.AddScoped<IFlexibilityService, FlexibilityService>();
 
             //builder.Services.AddControllers();
             builder.Services.AddControllers()
                 .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.Converters.Add(new JsonEnumDisplayConverter<WoodType>());
-                    options.JsonSerializerOptions.Converters.Add(new JsonEnumDisplayConverter<Flexibility>());
                     options.JsonSerializerOptions.Converters.Add(new JsonEnumDisplayConverter<WandCore>());
                 });
 

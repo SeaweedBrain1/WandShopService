@@ -29,7 +29,10 @@ namespace WandShop.Domain.Repository
 
         public async Task<List<Wand>> GetAllWandsAsync()
         {
-            return await _context.Wands.ToListAsync();
+            return await _context
+                .Wands
+                .Include(w => w.Flexibility)
+                .ToListAsync();
         }
 
         public async Task<List<Wand>> GetFilteredWandsAsync(WandFilterDto filter)
@@ -38,7 +41,7 @@ namespace WandShop.Domain.Repository
 
             query = ApplyWoodTypeFilter(query, filter);
             query = ApplyLengthFilter(query, filter);
-            query = ApplyFlexibilityFilter(query, filter);
+            //query = ApplyFlexibilityFilter(query, filter);
             query = ApplyWandCoreFilter(query, filter);
 
             return await query.ToListAsync();
@@ -46,7 +49,11 @@ namespace WandShop.Domain.Repository
 
         public async Task<Wand> GetWandAsync(int id)
         {
-            return await _context.Wands.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return await _context
+                .Wands
+                .Include(w => w.Flexibility)
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<Wand> UpdateWandAsync(Wand wand)
@@ -76,12 +83,12 @@ namespace WandShop.Domain.Repository
             return query;
         }
 
-        private IQueryable<Wand> ApplyFlexibilityFilter(IQueryable<Wand> query, WandFilterDto filter)
-        {
-            if (filter.Flexibility.HasValue)
-                query = query.Where(w => w.Flexibility == filter.Flexibility.Value);
-            return query;
-        }
+        //private IQueryable<Wand> ApplyFlexibilityFilter(IQueryable<Wand> query, WandFilterDto filter)
+        //{
+        //    if (filter.Flexibility.HasValue)
+        //        query = query.Where(w => w.Flexibility == filter.Flexibility.Value);
+        //    return query;
+        //}
 
         private IQueryable<Wand> ApplyWandCoreFilter(IQueryable<Wand> query, WandFilterDto filter)
         {

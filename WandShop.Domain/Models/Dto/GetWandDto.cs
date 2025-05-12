@@ -7,6 +7,6 @@ using WandShop.Domain.Enums;
 
 namespace WandShop.Domain.Models.Dto;
 
-public record GetWandDto(int Id, WoodType WoodType, decimal Length, WandCore Core, Flexibility Flexibility, decimal Price, bool Deleted)
+public record GetWandDto(int Id, WoodType WoodType, decimal Length, WandCore Core, string FlexibilityName, decimal Price, bool Deleted)
 {
 }

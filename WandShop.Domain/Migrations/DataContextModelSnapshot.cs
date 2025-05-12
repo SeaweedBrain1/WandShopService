@@ -22,6 +22,23 @@ namespace WandShop.Domain.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("WandShop.Domain.Models.Flexibility", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Flexibilities");
+                });
+
             modelBuilder.Entity("WandShop.Domain.Models.Wand", b =>
                 {
                     b.Property<int>("Id")
@@ -42,7 +59,7 @@ namespace WandShop.Domain.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Flexibility")
+                    b.Property<int>("FlexibilityId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Length")
@@ -62,7 +79,20 @@ namespace WandShop.Domain.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FlexibilityId");
+
                     b.ToTable("Wands");
+                });
+
+            modelBuilder.Entity("WandShop.Domain.Models.Wand", b =>
+                {
+                    b.HasOne("WandShop.Domain.Models.Flexibility", "Flexibility")
+                        .WithMany()
+                        .HasForeignKey("FlexibilityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Flexibility");
                 });
 #pragma warning restore 612, 618
         }

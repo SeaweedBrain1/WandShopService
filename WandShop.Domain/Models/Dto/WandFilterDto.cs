@@ -13,7 +13,7 @@ public class WandFilterDto
 {
     public WoodType? WoodType { get; set; }
     public decimal? Length { get; set; }
-    public Flexibility? Flexibility { get; set; }
+    //public Flexibility? Flexibility { get; set; }
 
     public WandCore? Core { get; set; }
 }

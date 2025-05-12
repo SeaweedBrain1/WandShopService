@@ -12,7 +12,7 @@ public class UpdateWandDto
     public WoodType? WoodType { get; set; }
     public decimal? Length { get; set; }
     public WandCore? Core { get; set; }
-    public Flexibility? Flexibility { get; set; }
+    public int? FlexibilityId { get; set; }
     public decimal? Price { get; set; }
     public bool? Deleted { get; set; }
 
@@ -21,7 +21,7 @@ public class UpdateWandDto
         if (WoodType.HasValue) wand.WoodType = WoodType.Value;
         if (Length.HasValue) wand.Length = Length.Value;
         if (Core.HasValue) wand.Core = Core.Value;
-        if (Flexibility.HasValue) wand.Flexibility = Flexibility.Value;
+        if (FlexibilityId.HasValue) wand.FlexibilityId = FlexibilityId.Value;
         if (Price.HasValue) wand.Price = Price.Value;
         if (Deleted.HasValue) wand.Deleted = Deleted.Value;
 
