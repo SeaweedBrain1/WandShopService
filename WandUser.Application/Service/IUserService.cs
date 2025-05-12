@@ -9,7 +9,7 @@ namespace WandUser.Application.Service
 {
     public interface IUserService
     {
-        Task<List<User>> GetAllUsersAsync();
-        Task<User> DeleteUserAsync(int userId);
+        Task<List<UserDto>> GetAllUsersAsync();
+        Task<UserDto> DeleteUserAsync(int userId);
     }
 }

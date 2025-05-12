@@ -44,7 +44,7 @@ public class WandService : IWandService
     {
         var wandToDelete = await GetWandAsync(id);
         wandToDelete.Deleted = true;
-        await UpdateAsync(wandToDelete.ToUpdateWandDto());
+        await UpdateAsync(id, wandToDelete.ToUpdateWandDto());
         return wandToDelete.ToGetWandDto();
         //var result = await _wandService.UpdateAsync(wand);
     }
@@ -69,9 +69,9 @@ public class WandService : IWandService
         return result.Select(w => w.ToGetWandDto()).ToList();
     }
 
-    public async Task<GetWandDto> UpdateAsync(UpdateWandDto updateWandDto)
+    public async Task<GetWandDto> UpdateAsync(int id, UpdateWandDto updateWandDto)
     {
-        var wand = await _repository.GetWandAsync(updateWandDto.Id);
+        var wand = await _repository.GetWandAsync(id);
         if (wand == null) throw new Exception("Wand not found");
 
         //if (updateWandDto.WoodType.HasValue) wand.WoodType = updateWandDto.WoodType.Value;
@@ -81,6 +81,10 @@ public class WandService : IWandService
         //if (updateWandDto.Price.HasValue) wand.Price = updateWandDto.Price.Value;
 
         var updated = await _repository.UpdateWandAsync(updateWandDto.ToWand(wand));
+        var key = $"wand:{id}";
+        await _redisDb.KeyDeleteAsync(key);
+        await _redisDb.StringSetAsync(key, JsonSerializer.Serialize(updated), TimeSpan.FromDays(1));
+
         return updated.ToGetWandDto();
 
         //var result = await _repository.UpdateWandAsync(wand);

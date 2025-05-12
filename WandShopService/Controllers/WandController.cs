@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WandShop.Application.Service;
 using WandShop.Domain.Models;
 using WandShop.Domain.Models.Dto;
@@ -24,6 +25,7 @@ namespace WandShopService.Controllers
             return Ok(result);
         }
 
+        
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {
@@ -47,6 +49,7 @@ namespace WandShopService.Controllers
             return Ok(result);
         }
 
+        [Authorize(Policy = "EmployeeOnly")]
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] CreateWandDto createWandDto)
         {
@@ -55,14 +58,16 @@ namespace WandShopService.Controllers
             return Ok(result);
         }
 
+        [Authorize(Policy = "EmployeeOnly")]
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, [FromBody] UpdateWandDto updateWandDto)
         {
-            var result = await _wandService.UpdateAsync(updateWandDto);
+            var result = await _wandService.UpdateAsync(id, updateWandDto);
 
             return Ok(result);
         }
 
+        [Authorize(Policy = "AdminOnly")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

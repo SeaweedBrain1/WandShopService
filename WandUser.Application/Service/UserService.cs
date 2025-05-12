@@ -19,14 +19,16 @@ namespace WandUser.Application.Service
             _roleRepository = roleRepository;
         }
 
-        public async Task<User> DeleteUserAsync(int userId)
+        public async Task<UserDto> DeleteUserAsync(int userId)
         {
-            return await _userRepository.DeleteUserAsync(userId);
+            var result = await _userRepository.DeleteUserAsync(userId);
+            return result.ToUserDto();
         }
 
-        public async Task<List<User>> GetAllUsersAsync()
+        public async Task<List<UserDto>> GetAllUsersAsync()
         {
-            return await _userRepository.GetAllUsersAsync();
+            var result = await _userRepository.GetAllUsersAsync();
+            return result.Select(u => u.ToUserDto()).ToList(); ;
         }
     }
 }

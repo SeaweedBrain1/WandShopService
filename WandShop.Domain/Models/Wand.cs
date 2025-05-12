@@ -22,8 +22,7 @@ namespace WandShop.Domain.Models
         public UpdateWandDto ToUpdateWandDto()
         {
             return new UpdateWandDto
-            {
-                Id = this.Id,  
+            { 
                 WoodType = this.WoodType, 
                 Length = this.Length,  
                 Core = this.Core,  

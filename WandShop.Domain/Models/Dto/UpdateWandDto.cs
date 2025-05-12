@@ -9,7 +9,6 @@ namespace WandShop.Domain.Models.Dto;
 
 public class UpdateWandDto
 {
-    public int Id { get; set; }
     public WoodType? WoodType { get; set; }
     public decimal? Length { get; set; }
     public WandCore? Core { get; set; }

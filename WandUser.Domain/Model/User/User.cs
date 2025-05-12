@@ -33,4 +33,10 @@ public class User
     public bool IsActive { get; set; } = true;
 
 
+    public UserDto ToUserDto()
+    {
+        return new UserDto(Id, Username, Email, CreatedAt, LastLoginAt, IsActive);
+    }
+
+
 }
