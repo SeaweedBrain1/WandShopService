@@ -11,5 +11,10 @@ namespace WandUser.Application.Service
     {
         Task<List<UserDto>> GetAllUsersAsync();
         Task<UserDto> DeleteUserAsync(int userId);
+        Task<UserDto> ResetPasswordAsync(int userId, string newPassword);
+        Task<UserDto> GetUserByIdAsync(int userId);
+        Task<UserDto> UpdateUserProfileAsync(int userId, string? newUsername, string? newEmail);
+
+
     }
 }

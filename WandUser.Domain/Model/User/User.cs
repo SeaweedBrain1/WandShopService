@@ -35,7 +35,7 @@ public class User
 
     public UserDto ToUserDto()
     {
-        return new UserDto(Id, Username, Email, CreatedAt, LastLoginAt, IsActive);
+        return new UserDto(Id, Username, Email, Roles, CreatedAt, LastLoginAt, IsActive);
     }
 
 

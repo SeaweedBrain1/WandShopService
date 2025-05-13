@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WandShop.Application.Service;
 using WandShop.Domain.Models;
 
@@ -32,6 +33,7 @@ public class FlexibilityController : ControllerBase
         return Ok(flexibility); 
     }
 
+    [Authorize(Policy = "EmployeeOnly")]
     [HttpPost]
     public async Task<ActionResult<Flexibility>> AddFlexibility(Flexibility flexibility)
     {
@@ -40,6 +42,7 @@ public class FlexibilityController : ControllerBase
 
     }
 
+    [Authorize(Policy = "EmployeeOnly")]
     [HttpPut("{id}")]
     public async Task<ActionResult<Flexibility>> UpdateFlexibility(int id, Flexibility flexibility)
     {

@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace WandUser.Domain.Model.User;
 
-public record UserDto(int Id, string Username, string Email, DateTime CreatedAt, DateTime? LastLoginAt, bool IsActive)
+public record UserDto(int Id, string Username, string Email, ICollection<Role> Roles, DateTime CreatedAt, DateTime? LastLoginAt, bool IsActive)
 {
 }

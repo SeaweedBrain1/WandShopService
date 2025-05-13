@@ -63,6 +63,10 @@ namespace WandShopService
                     policy.RequireRole("Admin"));
                 options.AddPolicy("EmployeeOnly", policy =>
                     policy.RequireRole("Employee"));
+                options.AddPolicy("ClientOnly", policy =>
+                    policy.RequireRole("Client"));
+                options.AddPolicy("ClientEmployeeOrAdmin", policy =>
+                    policy.RequireRole("Client", "Employee", "Admin"));
             });
 
             builder.Services.AddScoped<IWandRepository, WandRepository>();

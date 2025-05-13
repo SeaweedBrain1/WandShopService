@@ -70,5 +70,13 @@ namespace WandUser.Domain.Repositories
                                  .ToListAsync();    
         }
 
+        public async Task<User> GetUserByIdAsync(int userId)
+        {
+            return await _context.Users
+                .Include(u => u.Roles)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+        }
+
+
     }
 }

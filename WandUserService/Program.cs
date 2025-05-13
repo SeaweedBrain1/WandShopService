@@ -63,12 +63,18 @@ builder.Services.AddAuthorization(options =>
         policy.RequireRole("Admin"));
     options.AddPolicy("EmployeeOnly", policy =>
         policy.RequireRole("Employee"));
+    options.AddPolicy("ClientOnly", policy =>
+        policy.RequireRole("Client"));
+    options.AddPolicy("ClientEmployeeOrAdmin", policy =>
+        policy.RequireRole("Client", "Employee", "Admin"));
 });
 
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IRegisterService, RegisterService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
+builder.Services.AddScoped<IAuthorizationHelper, AuthorizationHelper>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
