@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
@@ -8,19 +10,24 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using WandShop.Domain.Models;
 using WandShop.Domain.Models.Dto;
+using WandShop.Domain.Repositories;
 using WandShop.Domain.Repository;
 
 namespace WandShop.Application.Service;
 
 public class WandService : IWandService
 {
-    private IWandRepository _repository;
+    private IWandRepository _wandRepository;
+    private IFlexibilityRepository _flexibilityRepository;
+    private readonly IMapper _mapper;
     //private readonly IMemoryCache _cache;
     private readonly IDatabase _redisDb;
 
-    public WandService(IWandRepository repository/*, IMemoryCache cache*/)
+    public WandService(IWandRepository wandRepository, IFlexibilityRepository flexibilityRepository, IMapper mapper/*, IMemoryCache cache*/)
     {
-        _repository = repository;
+        _wandRepository = wandRepository;
+        _flexibilityRepository = flexibilityRepository;
+        _mapper = mapper;
         //_cache = cache;
         var redis = ConnectionMultiplexer.Connect("redis:6379");
         _redisDb = redis.GetDatabase();
@@ -28,68 +35,80 @@ public class WandService : IWandService
 
     public GetWandDto Add(CreateWandDto createWandDto)
     {
-        var result = _repository.AddWandAsync(createWandDto.ToWand()).Result;
+        var result = _wandRepository.AddWandAsync(_mapper.Map<Wand>(createWandDto)).Result;
 
-        return result.ToGetWandDto();
+        return _mapper.Map<GetWandDto>(result);
     }
 
     public async Task<GetWandDto> AddAsync(CreateWandDto createWandDto)
     {
-        var result = await _repository.AddWandAsync(createWandDto.ToWand());
+        var flexibility = _flexibilityRepository.GetFlexibilityByNameAsync(createWandDto.FlexibilityName);
+        if (flexibility is null) throw new ArgumentException($"Flexibility {createWandDto.FlexibilityName} does not exist.");
+        var wand = _mapper.Map<Wand>(createWandDto);
+        wand.Flexibility = await flexibility;
 
-        return result.ToGetWandDto();
+        var result = await _wandRepository.AddWandAsync(wand);
+
+        return _mapper.Map<GetWandDto>(result);
     }
 
     public async Task<GetWandDto> DeleteWand(int id)
     {
-        var wandToDelete = await GetWandAsync(id);
-        wandToDelete.Deleted = true;
-        await UpdateAsync(id, wandToDelete.ToUpdateWandDto());
-        return wandToDelete.ToGetWandDto();
-        //var result = await _wandService.UpdateAsync(wand);
+
+        var wand = await _wandRepository.GetWandAsync(id);
+        if (wand == null)
+            throw new Exception("Wand not found");
+
+        var updateDto = new UpdateWandDto
+        {
+            Deleted = true
+        };
+
+        await UpdateAsync(id, updateDto);
+        return _mapper.Map<GetWandDto>(wand);
     }
 
     public async Task<List<GetWandDto>> GetAllAsync()
     {
-        var result = await _repository.GetAllWandsAsync();
+        var result = await _wandRepository.GetAllWandsAsync();
 
-        return result.Select(w => w.ToGetWandDto()).ToList();
+        return result.Select(w => _mapper.Map<GetWandDto>(w)).ToList();
     }
 
     public async Task<GetWandDto> GetAsync(int id)
     {
         var result = await GetWandAsync(id);
-        return result.ToGetWandDto();
+        return _mapper.Map<GetWandDto>(result);
     }
 
     public async Task<List<GetWandDto>> GetWandsByAsync(WandFilterDto filter)
     {
-        var result = await _repository.GetFilteredWandsAsync(filter);
+        var result = await _wandRepository.GetFilteredWandsAsync(filter);
 
-        return result.Select(w => w.ToGetWandDto()).ToList();
+        return result.Select(w => _mapper.Map<GetWandDto>(w)).ToList();
     }
 
     public async Task<GetWandDto> UpdateAsync(int id, UpdateWandDto updateWandDto)
     {
-        var wand = await _repository.GetWandAsync(id);
+        var wand = await _wandRepository.GetWandAsync(id);
         if (wand == null) throw new Exception("Wand not found");
 
-        //if (updateWandDto.WoodType.HasValue) wand.WoodType = updateWandDto.WoodType.Value;
-        //if (updateWandDto.Length.HasValue) wand.Length = updateWandDto.Length.Value;
-        //if (updateWandDto.Core.HasValue) wand.Core = updateWandDto.Core.Value;
-        //if (updateWandDto.Flexibility.HasValue) wand.Flexibility = updateWandDto.Flexibility.Value;
-        //if (updateWandDto.Price.HasValue) wand.Price = updateWandDto.Price.Value;
+        _mapper.Map(updateWandDto, wand);
 
-        var updated = await _repository.UpdateWandAsync(updateWandDto.ToWand(wand));
+        if (!string.IsNullOrWhiteSpace(updateWandDto.FlexibilityName))
+        {
+            var flexibility = await _flexibilityRepository.GetFlexibilityByNameAsync(updateWandDto.FlexibilityName);
+            if (flexibility == null) throw new ArgumentException($"Flexibility '{updateWandDto.FlexibilityName}' does not exist.");
+
+            wand.Flexibility = flexibility;
+        }
+
+        var updated = await _wandRepository.UpdateWandAsync(wand);
         var key = $"wand:{id}";
         await _redisDb.KeyDeleteAsync(key);
         await _redisDb.StringSetAsync(key, JsonSerializer.Serialize(updated), TimeSpan.FromDays(1));
 
-        return updated.ToGetWandDto();
-
-        //var result = await _repository.UpdateWandAsync(wand);
-
-        //return result.ToGetWandDto();
+        return _mapper.Map<GetWandDto>(updated);
     }
 
     private async Task<Wand> GetWandAsync(int id)
@@ -103,7 +122,7 @@ public class WandService : IWandService
 
         if (wand == null)
         {
-            wand = await _repository.GetWandAsync(id);
+            wand = await _wandRepository.GetWandAsync(id);
             if (wand != null)
                 await _redisDb.StringSetAsync(key, JsonSerializer.Serialize(wand), TimeSpan.FromDays(1));
         }

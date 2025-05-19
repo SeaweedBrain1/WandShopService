@@ -17,7 +17,6 @@ public class DataContext : DbContext
         modelBuilder.Entity<Wand>()
             .HasOne(w => w.Flexibility)
             .WithMany()
-            .HasForeignKey(w => w.FlexibilityId)
             .OnDelete(DeleteBehavior.Restrict);
     }
 }

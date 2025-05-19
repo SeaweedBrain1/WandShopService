@@ -22,6 +22,11 @@ public class FlexibilityRepository : IFlexibilityRepository
         return await _context.Flexibilities.FirstOrDefaultAsync(f => f.Id == id);
     }
 
+    public async Task<Flexibility> GetFlexibilityByNameAsync(string name)
+    {
+        return await _context.Flexibilities.FirstOrDefaultAsync(f => f.Name == name);
+    }
+
     public async Task<List<Flexibility>> GetAllFlexibilitiesAsync()
     {
         return await _context.Flexibilities.ToListAsync();

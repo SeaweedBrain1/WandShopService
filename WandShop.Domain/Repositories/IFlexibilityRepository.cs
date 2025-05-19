@@ -11,6 +11,7 @@ public interface IFlexibilityRepository
 {
     #region Flexibility
     Task<Flexibility> GetFlexibilityAsync(int id);
+    Task<Flexibility> GetFlexibilityByNameAsync(string name);
     Task<Flexibility> AddFlexibilityAsync(Flexibility flexibility);
     Task<Flexibility> UpdateFlexibilityAsync(Flexibility flexibility);
     Task<List<Flexibility>> GetAllFlexibilitiesAsync();

@@ -8,6 +8,7 @@ using System.Text;
 using WandShop.Application.Service;
 using WandShop.Domain.Enums;
 using WandShop.Domain.Models;
+using WandShop.Domain.Models.Dto;
 using WandShop.Domain.Repositories;
 using WandShop.Domain.Repository;
 using WandShop.Domain.Seeders;
@@ -30,6 +31,9 @@ namespace WandShopService
             var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
             builder.Services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(connectionString), ServiceLifetime.Transient);
+
+            builder.Services.AddAutoMapper(typeof(WandProfile).Assembly);
+
 
             var rsa = RSA.Create();
             rsa.ImportFromPem(File.ReadAllText("./data/public.key"));

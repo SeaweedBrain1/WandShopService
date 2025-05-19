@@ -22,6 +22,8 @@ namespace WandShop.Domain.Repository
 
         public async Task<Wand> AddWandAsync(Wand wand)
         {
+            if (wand.Flexibility != null) _context.Entry(wand.Flexibility).State = EntityState.Unchanged;
+
             _context.Wands.Add(wand);
             await _context.SaveChangesAsync();
             return wand;
@@ -58,6 +60,7 @@ namespace WandShop.Domain.Repository
 
         public async Task<Wand> UpdateWandAsync(Wand wand)
         {
+            _context.Entry(wand.Flexibility).State = EntityState.Unchanged;
             _context.Wands.Update(wand);
             await _context.SaveChangesAsync();
             return wand;

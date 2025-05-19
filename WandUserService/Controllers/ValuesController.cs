@@ -134,6 +134,8 @@ public class UserController : ControllerBase
             if (!allowed)
                 return Forbid();
 
+
+
             var result = await _userService.ResetPasswordAsync(request.UserId, request.NewPassword);
             return Ok(new
             {

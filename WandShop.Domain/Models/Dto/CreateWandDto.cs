@@ -7,17 +7,12 @@ using WandShop.Domain.Enums;
 
 namespace WandShop.Domain.Models.Dto;
 
-public record CreateWandDto(WoodType WoodType, decimal Length, WandCore Core, int FlexibilityId, decimal Price)
+public class CreateWandDto
 {
-    public Wand ToWand()
-    {
-        return new Wand
-        {
-            WoodType = this.WoodType,
-            Length = this.Length,
-            Core = this.Core,
-            FlexibilityId = this.FlexibilityId,
-            Price = this.Price
-        };
-    }
+    public WoodType WoodType { get; set; }
+    public decimal Length { get; set; }
+    public WandCore Core { get; set; }
+    public string FlexibilityName { get; set; } = null!;
+    public decimal Price { get; set; }
 }
+

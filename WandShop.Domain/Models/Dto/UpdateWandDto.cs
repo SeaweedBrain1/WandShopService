@@ -12,21 +12,21 @@ public class UpdateWandDto
     public WoodType? WoodType { get; set; }
     public decimal? Length { get; set; }
     public WandCore? Core { get; set; }
-    public int? FlexibilityId { get; set; }
+    public string? FlexibilityName { get; set; }
     public decimal? Price { get; set; }
     public bool? Deleted { get; set; }
 
-    public Wand ToWand(Wand wand)
-    {
-        if (WoodType.HasValue) wand.WoodType = WoodType.Value;
-        if (Length.HasValue) wand.Length = Length.Value;
-        if (Core.HasValue) wand.Core = Core.Value;
-        if (FlexibilityId.HasValue) wand.FlexibilityId = FlexibilityId.Value;
-        if (Price.HasValue) wand.Price = Price.Value;
-        if (Deleted.HasValue) wand.Deleted = Deleted.Value;
+    //public Wand ToWand(Wand wand)
+    //{
+    //    if (WoodType.HasValue) wand.WoodType = WoodType.Value;
+    //    if (Length.HasValue) wand.Length = Length.Value;
+    //    if (Core.HasValue) wand.Core = Core.Value;
+    //    if (Flexibility != null) wand.Flexibility = Flexibility;
+    //    if (Price.HasValue) wand.Price = Price.Value;
+    //    if (Deleted.HasValue) wand.Deleted = Deleted.Value;
 
-        return wand;
-    }
+    //    return wand;
+    //}
 }
 
 

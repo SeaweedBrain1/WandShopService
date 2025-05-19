@@ -55,7 +55,6 @@ namespace WandShop.Domain.Seeders
                         WoodType = WoodType.Holly,
                         Length = 12.5m,
                         Core = WandCore.PhoenixFeather,
-                        FlexibilityId = supple.Id,
                         Flexibility = supple,
                         Price = 250.00m
                     },
@@ -64,7 +63,6 @@ namespace WandShop.Domain.Seeders
                         WoodType = WoodType.Yew,
                         Length = 14.0m,
                         Core = WandCore.DragonHeartstring,
-                        FlexibilityId = rigid.Id,
                         Flexibility = rigid,
                         Price = 300.00m
                     },
@@ -73,7 +71,6 @@ namespace WandShop.Domain.Seeders
                         WoodType = WoodType.Oak,
                         Length = 13.0m,
                         Core = WandCore.UnicornHair,
-                        FlexibilityId = slightlyRigid.Id,
                         Flexibility = slightlyRigid,
                         Price = 270.00m
                     },
@@ -82,7 +79,6 @@ namespace WandShop.Domain.Seeders
                         WoodType = WoodType.Willow,
                         Length = 15.5m,
                         Core = WandCore.ThestralTailHair,
-                        FlexibilityId = veryFlexible.Id,
                         Flexibility = veryFlexible,
                         Price = 350.00m
                     }
