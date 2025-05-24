@@ -15,7 +15,6 @@ using WandShop.Domain.Seeders;
 using WandShop.Infrastructure.Converters;
 
 
-//TODO redis, struktura dto, czy dao?, komunikacja 
 
 namespace WandShopService
 {

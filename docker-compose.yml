@@ -22,6 +22,18 @@ services:
       context: .
       dockerfile: WandUserService/Dockerfile
 
+  cartservice:
+    image: ${DOCKER_REGISTRY-}cartservice
+    depends_on:
+      - db
+      - wanduserservice
+    environment:
+      - CONNECTION_STRING=Server=${DB_HOST};Database=${DB_NAME};User Id=${DB_USER};Password=${SA_PASSWORD};Encrypt=False;TrustServerCertificate=True;
+    build:
+      context: .
+      dockerfile: CartService/Dockerfile
+
+
   db:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
