@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WandUser.Domain.Model.User;
+using WandUser.Domain.Model.Dto;
 
 namespace WandUser.Application.Service
 {

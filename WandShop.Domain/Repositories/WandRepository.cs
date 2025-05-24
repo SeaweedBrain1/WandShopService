@@ -43,7 +43,8 @@ namespace WandShop.Domain.Repository
 
             query = ApplyWoodTypeFilter(query, filter);
             query = ApplyLengthFilter(query, filter);
-            //query = ApplyFlexibilityFilter(query, filter);
+            query = ApplyFlexibilityFilter(query, filter);
+            query = query.Include(w => w.Flexibility);
             query = ApplyWandCoreFilter(query, filter);
 
             return await query.ToListAsync();
@@ -86,12 +87,13 @@ namespace WandShop.Domain.Repository
             return query;
         }
 
-        //private IQueryable<Wand> ApplyFlexibilityFilter(IQueryable<Wand> query, WandFilterDto filter)
-        //{
-        //    if (filter.Flexibility.HasValue)
-        //        query = query.Where(w => w.Flexibility == filter.Flexibility.Value);
-        //    return query;
-        //}
+        private IQueryable<Wand> ApplyFlexibilityFilter(IQueryable<Wand> query, WandFilterDto filter)
+        {
+            if (!string.IsNullOrWhiteSpace(filter.FlexibilityName))
+                query = query.Where(w => w.Flexibility.Name.ToLower() == filter.FlexibilityName.ToLower());
+            return query;
+        }
+
 
         private IQueryable<Wand> ApplyWandCoreFilter(IQueryable<Wand> query, WandFilterDto filter)
         {

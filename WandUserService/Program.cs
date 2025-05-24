@@ -6,6 +6,8 @@ using Microsoft.OpenApi.Models;
 using System.Security.Cryptography;
 using System.Text;
 using WandUser.Application.Service;
+using WandUser.Application.Service.Helper;
+using WandUser.Domain.Model.Dto;
 using WandUser.Domain.Model.JWT;
 using WandUser.Domain.Repositories;
 using WandUser.Domain.Security;
@@ -16,6 +18,9 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
 builder.Services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(connectionString), ServiceLifetime.Transient);
+
+builder.Services.AddAutoMapper(typeof(UserProfile));
+
 
 // JWT config
 var jwtSettings = builder.Configuration.GetSection("Jwt");

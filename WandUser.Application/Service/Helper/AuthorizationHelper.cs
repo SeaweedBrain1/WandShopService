@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WandUser.Domain.Repositories;
 
-namespace WandUser.Application.Service;
+namespace WandUser.Application.Service.Helper;
 
 public class AuthorizationHelper : IAuthorizationHelper
 {

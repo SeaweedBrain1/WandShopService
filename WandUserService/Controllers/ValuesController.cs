@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WandUser.Application.Service;
+using WandUser.Application.Service.Helper;
 using WandUser.Domain.Exceptions.Login;
 using WandUser.Domain.Exceptions.Register;
 using WandUser.Domain.Model.Requests;
