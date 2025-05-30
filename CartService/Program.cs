@@ -12,13 +12,8 @@ using CartUserService = Cart.Application.Services.CartService;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
-//builder.Services.AddDbContext<CartDataContext>(options =>
-//    options.UseSqlServer(connectionString), ServiceLifetime.Transient);
 
 builder.Services.AddDbContext<CartDataContext>(options =>
-    options.UseSqlServer(connectionString), ServiceLifetime.Transient);
-
-builder.Services.AddDbContext<WandUser.Domain.Repositories.DataContext>(options =>
     options.UseSqlServer(connectionString), ServiceLifetime.Transient);
 
 var rsa = RSA.Create();
@@ -55,14 +50,10 @@ builder.Services.AddAuthorization(options =>
         policy.RequireRole("Employee"));
     options.AddPolicy("ClientOnly", policy =>
         policy.RequireRole("Client"));
-    options.AddPolicy("ClientEmployeeOrAdmin", policy =>
-        policy.RequireRole("Client", "Employee", "Admin"));
 });
 
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddScoped<ICartService, CartUserService>();
-builder.Services.AddScoped<IAuthorizationHelper, AuthorizationHelper>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Add services to the container.
 

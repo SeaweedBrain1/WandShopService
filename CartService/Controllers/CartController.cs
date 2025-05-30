@@ -13,11 +13,9 @@ namespace CartService.Controllers;
 public class CartController : ControllerBase
 {
     private ICartService _cartService;
-    private readonly IAuthorizationHelper _authorizationHelper;
-    public CartController(ICartService cartService, IAuthorizationHelper authorizationHelper)
+    public CartController(ICartService cartService)
     {
         _cartService = cartService;
-        _authorizationHelper = authorizationHelper;
     }
 
     private int GetUserIdFromToken()
@@ -30,7 +28,6 @@ public class CartController : ControllerBase
     }
 
     [HttpPost("{wandId}")]
-    [Authorize(Policy = "ClientEmployeeOrAdmin")]
     public async Task<IActionResult> AddItemToCart([FromRoute] int wandId)
     {
         try
@@ -38,9 +35,6 @@ public class CartController : ControllerBase
             var userId = GetUserIdFromToken();
             var roles = User.FindAll(ClaimTypes.Role).Select(r => r.Value).ToList();
 
-            var allowed = await _authorizationHelper.CanEditUserAsync(userId, roles, userId);
-            if (!allowed)
-                return Forbid();
 
             await _cartService.AddItemToCartAsync(userId, wandId);
             return Ok("Item added to cart.");
@@ -52,7 +46,7 @@ public class CartController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize(Policy = "ClientEmployeeOrAdmin")]
+    [Authorize(Policy = "ClientOnly")]
     public async Task<IActionResult> GetUserCart()
     {
         try
@@ -60,9 +54,6 @@ public class CartController : ControllerBase
             var userId = GetUserIdFromToken();
             var roles = User.FindAll(ClaimTypes.Role).Select(r => r.Value).ToList();
 
-            var allowed = await _authorizationHelper.CanEditUserAsync(userId, roles, userId);
-            if (!allowed)
-                return Forbid();
 
             var cart = await _cartService.GetUserCartAsync(userId);
             return Ok(cart);
@@ -74,7 +65,6 @@ public class CartController : ControllerBase
     }
 
     [HttpDelete("{itemId}")]
-    [Authorize(Policy = "ClientEmployeeOrAdmin")]
     public async Task<IActionResult> RemoveItem([FromRoute] int itemId)
     {
         try
@@ -82,9 +72,6 @@ public class CartController : ControllerBase
             var userId = GetUserIdFromToken();
             var roles = User.FindAll(ClaimTypes.Role).Select(r => r.Value).ToList();
 
-            var allowed = await _authorizationHelper.CanEditUserAsync(userId, roles, userId);
-            if (!allowed)
-                return Forbid();
 
             await _cartService.RemoveItemAsync(userId, itemId);
             return Ok("Item removed.");
@@ -96,7 +83,7 @@ public class CartController : ControllerBase
     }
 
     [HttpDelete]
-    [Authorize(Policy = "ClientEmployeeOrAdmin")]
+    [Authorize(Policy = "ClientOnly")]
     public async Task<IActionResult> DeleteCart()
     {
         try
@@ -104,9 +91,6 @@ public class CartController : ControllerBase
             var userId = GetUserIdFromToken();
             var roles = User.FindAll(ClaimTypes.Role).Select(r => r.Value).ToList();
 
-            var allowed = await _authorizationHelper.CanEditUserAsync(userId, roles, userId);
-            if (!allowed)
-                return Forbid();
 
             await _cartService.DeleteCartAsync(userId);
             return Ok("Cart deleted.");
