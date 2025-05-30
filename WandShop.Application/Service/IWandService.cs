@@ -10,7 +10,8 @@ namespace WandShop.Application.Service
 {
     public interface IWandService
     {
-        public Task<List<GetWandDto>> GetAllAsync();
+        Task<List<GetWandDto>> GetAllAsync();
+        Task<List<GetWandDto>> GetAllValidAsync();
         Task<GetWandDto> GetAsync(int id);
         //Task<Wand> GetWandAsync(int id);
         Task<GetWandDto> UpdateAsync(int id, UpdateWandDto updateWandDto);

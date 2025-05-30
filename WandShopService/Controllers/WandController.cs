@@ -25,7 +25,14 @@ namespace WandShopService.Controllers
             return Ok(result);
         }
 
-        
+        [HttpGet("valid")]
+        public async Task<ActionResult> GetValid()
+        {
+            var result = await _wandService.GetAllValidAsync();
+            return Ok(result);
+        }
+
+
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {

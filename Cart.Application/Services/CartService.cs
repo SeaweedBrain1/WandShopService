@@ -1,4 +1,5 @@
-﻿using Cart.Domain.Exceptions;
+﻿using Cart.Application.Clients;
+using Cart.Domain.Exceptions;
 using Cart.Domain.Models;
 using Cart.Domain.Repositories;
 using System;
@@ -12,10 +13,12 @@ namespace Cart.Application.Services;
 public class CartService : ICartService
 {
     private readonly ICartRepository _repository;
+    private readonly IWandServiceClient _wandClient;
 
-    public CartService(ICartRepository repository)
+    public CartService(ICartRepository repository, IWandServiceClient wandClient)
     {
         _repository = repository;
+        _wandClient = wandClient;
     }
 
     public async Task AddItemToCartAsync(int userId, int wandId)
@@ -23,7 +26,16 @@ public class CartService : ICartService
         if (wandId <= 0)
             throw new ArgumentException("Invalid wand ID.");
 
+        var isValid = await _wandClient.IsWandValidAsync(wandId);
+        if (!isValid)
+            throw new NotFoundException($"Wand with ID {wandId} does not exist or is marked as deleted.");
+
         await _repository.AddItemAsync(userId, wandId);
+
+        //if (wandId <= 0)
+        //    throw new ArgumentException("Invalid wand ID.");
+
+        //await _repository.AddItemAsync(userId, wandId);
     }
 
     //public async Task<CartUser?> GetUserCartAsync(int userId)

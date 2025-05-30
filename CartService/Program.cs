@@ -1,3 +1,4 @@
+using Cart.Application.Clients;
 using Cart.Application.Services;
 using Cart.Domain.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -15,6 +16,18 @@ var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
 
 builder.Services.AddDbContext<CartDataContext>(options =>
     options.UseSqlServer(connectionString), ServiceLifetime.Transient);
+
+var wandBaseUrl = builder.Configuration.GetValue<string>("WandService:BaseUrl");
+
+builder.Services.AddHttpClient<IWandServiceClient, WandServiceClient>(client =>
+{
+    client.BaseAddress = new Uri(wandBaseUrl);
+})
+.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+{
+    ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
+});
+
 
 var rsa = RSA.Create();
 rsa.ImportFromPem(File.ReadAllText("./data/public.key"));

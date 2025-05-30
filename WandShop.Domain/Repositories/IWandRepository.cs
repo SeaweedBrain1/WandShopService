@@ -16,6 +16,7 @@ namespace WandShop.Domain.Repository
         Task<Wand> UpdateWandAsync(Wand wand);
         Task<List<Wand>> GetAllWandsAsync();
         Task<List<Wand>> GetFilteredWandsAsync(WandFilterDto filter);
+        Task<List<Wand>> GetAllValidWandsAsync();
 
         #endregion
 

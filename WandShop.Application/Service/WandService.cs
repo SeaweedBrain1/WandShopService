@@ -75,6 +75,13 @@ public class WandService : IWandService
         return result.Select(w => _mapper.Map<GetWandDto>(w)).ToList();
     }
 
+    public async Task<List<GetWandDto>> GetAllValidAsync()
+    {
+        var result = await _wandRepository.GetAllValidWandsAsync();
+
+        return result.Select(w => _mapper.Map<GetWandDto>(w)).ToList();
+    }
+
     public async Task<GetWandDto> GetAsync(int id)
     {
         var result = await GetWandAsync(id);

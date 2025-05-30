@@ -37,6 +37,15 @@ namespace WandShop.Domain.Repository
                 .ToListAsync();
         }
 
+        public async Task<List<Wand>> GetAllValidWandsAsync()
+        {
+            return await _context
+                .Wands
+                .Where(w => !w.Deleted)
+                .Include(w => w.Flexibility)
+                .ToListAsync();
+        }
+
         public async Task<List<Wand>> GetFilteredWandsAsync(WandFilterDto filter)
         {
             var query = _context.Wands.AsQueryable();
