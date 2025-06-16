@@ -365,3 +365,5 @@ FodyWeavers.xsd
 /WandUserService/data/private.key
 /WandUserService/data/public.key
 /CartService/data/public.key
+/WandUserService/data/private.key
+/.env
