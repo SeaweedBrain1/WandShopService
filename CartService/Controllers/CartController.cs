@@ -109,4 +109,24 @@ public class CartController : ControllerBase
         return Ok(carts);
     }
 
+    [HttpPost("place-order")]
+    [Authorize(Policy = "ClientOnly")]
+    public async Task<IActionResult> PlaceOrder()
+    {
+        try
+        {
+            var userId = GetUserIdFromToken();
+            await _cartService.PlaceOrderAsync(userId);
+            return Ok("Order placed and invoice event sent.");
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            return Unauthorized(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
 }

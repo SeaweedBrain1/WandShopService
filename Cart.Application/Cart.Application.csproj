@@ -15,11 +15,13 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Cart.Domain\Cart.Domain.csproj" />
     <ProjectReference Include="..\WandShop.Domain\WandShop.Domain.csproj" />
+    <ProjectReference Include="..\WandUser.Application\WandUser.Application.csproj" />
     <ProjectReference Include="..\WandUser.Domain\WandUser.Domain.csproj" />
   </ItemGroup>
 

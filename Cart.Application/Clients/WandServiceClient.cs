@@ -29,5 +29,14 @@ public class WandServiceClient : IWandServiceClient
 
         return validWands.Any(w => w.Id == wandId);
     }
+
+    public async Task<WandDto?> GetWandByIdAsync(int wandId)
+    {
+        var response = await _httpClient.GetAsync($"/api/Wand/{wandId}");
+        if (!response.IsSuccessStatusCode)
+            return null;
+
+        return await response.Content.ReadFromJsonAsync<WandDto>();
+    }
 }
 

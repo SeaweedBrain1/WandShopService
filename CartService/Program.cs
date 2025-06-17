@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Security.Cryptography;
+using WandUser.Application.Producer;
 using WandUser.Application.Service.Helper;
 using WandUser.Domain.Repositories;
 using CartUserService = Cart.Application.Services.CartService;
@@ -28,6 +29,16 @@ builder.Services.AddHttpClient<IWandServiceClient, WandServiceClient>(client =>
     ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
 });
 
+var userBaseUrl = builder.Configuration.GetValue<string>("UserService:BaseUrl");
+
+builder.Services.AddHttpClient<IUserServiceClient, UserServiceClient>(client =>
+{
+    client.BaseAddress = new Uri(userBaseUrl); // zmieñ na prawdziwy adres/hostname UserService
+})
+.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+{
+    ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
+});
 
 var rsa = RSA.Create();
 rsa.ImportFromPem(File.ReadAllText("./data/public.key"));
@@ -101,9 +112,11 @@ builder.Services.AddSwaggerGen(c =>
 
                         },
                         new List<string>()
-                      }
-                    });
+        }
+    });
 });
+
+builder.Services.AddSingleton<IKafkaProducer, KafkaProducer>();
 
 var app = builder.Build();
 

@@ -14,5 +14,6 @@ public interface ICartService
     Task<List<CartUser>> GetAllCartsAsync();
     Task RemoveItemAsync(int userId, int itemId);
     Task DeleteCartAsync(int userId);
+    Task PlaceOrderAsync(int userId);
 }
 
