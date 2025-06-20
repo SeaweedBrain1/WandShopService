@@ -1,0 +1,13 @@
+﻿C:\Users\oskar\source\repos\WandShopService\CartService\Controllers\CartController.cs
+C:\Users\oskar\source\repos\WandShopService\CartService\Program.cs
+C:\Users\oskar\source\repos\WandShopService\CartService\obj\Debug\net8.0\CartService.GlobalUsings.g.cs
+C:\Users\oskar\source\repos\WandShopService\CartService\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+C:\Users\oskar\source\repos\WandShopService\CartService\obj\Debug\net8.0\CartService.AssemblyInfo.cs
+C:\Users\oskar\source\repos\WandShopService\CartService\obj\Debug\net8.0\CartService.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\oskar\source\repos\WandShopService\CartService\appsettings.Development.json
+C:\Users\oskar\source\repos\WandShopService\CartService\appsettings.json
+C:\Users\oskar\source\repos\WandShopService\CartService\CartService.http
+C:\Users\oskar\source\repos\WandShopService\CartService\data\public.key
+C:\Users\oskar\source\repos\WandShopService\CartService\Dockerfile
+C:\Users\oskar\source\repos\WandShopService\CartService\Properties\launchSettings.json
+C:\Users\oskar\source\repos\WandShopService\.dockerignore

@@ -1,0 +1,14 @@
+﻿C:\Users\oskar\source\repos\WandShopService\WandUserService\Controllers\ValuesController.cs
+C:\Users\oskar\source\repos\WandShopService\WandUserService\Program.cs
+C:\Users\oskar\source\repos\WandShopService\WandUserService\obj\Debug\net8.0\WandUserService.GlobalUsings.g.cs
+C:\Users\oskar\source\repos\WandShopService\WandUserService\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+C:\Users\oskar\source\repos\WandShopService\WandUserService\obj\Debug\net8.0\WandUserService.AssemblyInfo.cs
+C:\Users\oskar\source\repos\WandShopService\WandUserService\obj\Debug\net8.0\WandUserService.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\oskar\source\repos\WandShopService\WandUserService\appsettings.Development.json
+C:\Users\oskar\source\repos\WandShopService\WandUserService\appsettings.json
+C:\Users\oskar\source\repos\WandShopService\WandUserService\data\private.key
+C:\Users\oskar\source\repos\WandShopService\WandUserService\data\public.key
+C:\Users\oskar\source\repos\WandShopService\WandUserService\Dockerfile
+C:\Users\oskar\source\repos\WandShopService\WandUserService\WandUserService.http
+C:\Users\oskar\source\repos\WandShopService\WandUserService\Properties\launchSettings.json
+C:\Users\oskar\source\repos\WandShopService\.dockerignore

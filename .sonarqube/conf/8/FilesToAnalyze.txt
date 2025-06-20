@@ -1,0 +1,4 @@
+﻿C:\Users\oskar\source\repos\WandShopService\WandShop.Application\Service\FlexibilityService.cs
+C:\Users\oskar\source\repos\WandShopService\WandShop.Application\Service\IFlexibilityService.cs
+C:\Users\oskar\source\repos\WandShopService\WandShop.Application\Service\IWandService.cs
+C:\Users\oskar\source\repos\WandShopService\WandShop.Application\Service\WandService.cs

@@ -14,18 +14,3 @@ public class Flexibility
     public string Name { get; set; } = null!;
 }
 
-
-
-//[TypeConverter(typeof(EnumDisplayTypeConverter<Flexibility>))]
-//public enum Flexibility
-//{
-//    Rigid,
-//    SlightlyRigid,
-//    Unyielding,
-//    Supple,
-//    VeryFlexible,
-//    Brittle,
-//    Swishy,
-//    Solid,
-//    Bendy
-//}

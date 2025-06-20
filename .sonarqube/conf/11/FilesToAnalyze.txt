@@ -1,0 +1,14 @@
+﻿C:\Users\oskar\source\repos\WandShopService\WandShopService\Controllers\FlexibilityController.cs
+C:\Users\oskar\source\repos\WandShopService\WandShopService\Controllers\WandController.cs
+C:\Users\oskar\source\repos\WandShopService\WandShopService\Program.cs
+C:\Users\oskar\source\repos\WandShopService\WandShopService\obj\Debug\net8.0\WandShopService.GlobalUsings.g.cs
+C:\Users\oskar\source\repos\WandShopService\WandShopService\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+C:\Users\oskar\source\repos\WandShopService\WandShopService\obj\Debug\net8.0\WandShopService.AssemblyInfo.cs
+C:\Users\oskar\source\repos\WandShopService\WandShopService\obj\Debug\net8.0\WandShopService.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\oskar\source\repos\WandShopService\WandShopService\appsettings.Development.json
+C:\Users\oskar\source\repos\WandShopService\WandShopService\appsettings.json
+C:\Users\oskar\source\repos\WandShopService\WandShopService\data\public.key
+C:\Users\oskar\source\repos\WandShopService\WandShopService\Dockerfile
+C:\Users\oskar\source\repos\WandShopService\WandShopService\WandShopService.http
+C:\Users\oskar\source\repos\WandShopService\WandShopService\Properties\launchSettings.json
+C:\Users\oskar\source\repos\WandShopService\.dockerignore

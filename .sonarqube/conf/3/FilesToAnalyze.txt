@@ -1,0 +1,4 @@
+﻿C:\Users\oskar\source\repos\WandShopService\.env
+C:\Users\oskar\source\repos\WandShopService\docker-compose.override.yml
+C:\Users\oskar\source\repos\WandShopService\docker-compose.yml
+C:\Users\oskar\source\repos\WandShopService\.dockerignore

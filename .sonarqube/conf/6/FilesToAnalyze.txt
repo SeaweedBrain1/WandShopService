@@ -1,0 +1,12 @@
+﻿C:\Users\oskar\source\repos\WandShopService\WandUser.Application\Producer\IKafkaProducer.cs
+C:\Users\oskar\source\repos\WandShopService\WandUser.Application\Producer\KafkaProducer.cs
+C:\Users\oskar\source\repos\WandShopService\WandUser.Application\Service\Helper\AuthorizationHelper.cs
+C:\Users\oskar\source\repos\WandShopService\WandUser.Application\Service\Helper\IAuthorizationHelper.cs
+C:\Users\oskar\source\repos\WandShopService\WandUser.Application\Service\IJwtTokenService.cs
+C:\Users\oskar\source\repos\WandShopService\WandUser.Application\Service\ILoginService.cs
+C:\Users\oskar\source\repos\WandShopService\WandUser.Application\Service\IRegisterService.cs
+C:\Users\oskar\source\repos\WandShopService\WandUser.Application\Service\IUserService.cs
+C:\Users\oskar\source\repos\WandShopService\WandUser.Application\Service\JwtTokenService.cs
+C:\Users\oskar\source\repos\WandShopService\WandUser.Application\Service\LoginService.cs
+C:\Users\oskar\source\repos\WandShopService\WandUser.Application\Service\RegisterService.cs
+C:\Users\oskar\source\repos\WandShopService\WandUser.Application\Service\UserService.cs

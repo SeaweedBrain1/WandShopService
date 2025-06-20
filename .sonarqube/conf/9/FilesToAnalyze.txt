@@ -1,0 +1,8 @@
+﻿C:\Users\oskar\source\repos\WandShopService\Cart.Application\Clients\Dto\UserDto.cs
+C:\Users\oskar\source\repos\WandShopService\Cart.Application\Clients\Dto\WandDto.cs
+C:\Users\oskar\source\repos\WandShopService\Cart.Application\Clients\IUserServiceClient.cs
+C:\Users\oskar\source\repos\WandShopService\Cart.Application\Clients\IWandServiceClient.cs
+C:\Users\oskar\source\repos\WandShopService\Cart.Application\Clients\UserServiceClient.cs
+C:\Users\oskar\source\repos\WandShopService\Cart.Application\Clients\WandServiceClient.cs
+C:\Users\oskar\source\repos\WandShopService\Cart.Application\Services\CartService.cs
+C:\Users\oskar\source\repos\WandShopService\Cart.Application\Services\ICartService.cs
