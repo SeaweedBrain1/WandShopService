@@ -30,9 +30,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "IntegrationTests", "{722B6442-B395-41F0-B6C7-A85834B12244}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{942ABA8D-409D-422D-9293-FA2F2C6C154F}"
-	ProjectSection(SolutionItems) = preProject
-		test.runsettings = test.runsettings
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cart", "Cart", "{0B994585-7FE0-4852-AA7D-5A1E2E286CF6}"
 EndProject
@@ -50,7 +47,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WandShopTests", "WandShopTe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WandShopService.UnitTests", "WandShopService.UnitTests\WandShopService.UnitTests.csproj", "{F6EADFE4-47A8-4688-B263-79D274692C6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WandShopService.IntegrationTest", "WandShopService.IntegrationTest\WandShopService.IntegrationTest.csproj", "{DCFCC936-6898-4AEA-A953-01E96F7498CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WandShopService.IntegrationTests", "WandShopService.IntegrationTest\WandShopService.IntegrationTests.csproj", "{DCFCC936-6898-4AEA-A953-01E96F7498CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

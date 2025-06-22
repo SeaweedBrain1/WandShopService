@@ -8,7 +8,8 @@ using WandShop.Domain.Models.Dto;
 using WandShopService.Controllers;
 using Xunit;
 
-namespace WandShop.Tests.Controllers;
+namespace WandShopService.UnitTests.Controllers;
+//namespace WandShop.Tests.Controllers;
 
 public class WandControllerTests
 {

@@ -27,9 +27,22 @@ public class Program
         // Add services to the container.
         //builder.Services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("TestDb"), ServiceLifetime.Transient);
 
-        var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
-        builder.Services.AddDbContext<DataContext>(options =>
-            options.UseSqlServer(connectionString), ServiceLifetime.Transient);
+        if (builder.Environment.IsEnvironment("IntegrationTest"))
+        {
+            builder.Services.AddDbContext<DataContext>(options =>
+                options.UseInMemoryDatabase("TestDb"));
+        }
+        else
+        {
+            var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+            builder.Services.AddDbContext<DataContext>(options =>
+                options.UseSqlServer(connectionString), ServiceLifetime.Transient);
+        }
+
+
+        //var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+        //builder.Services.AddDbContext<DataContext>(options =>
+        //    options.UseSqlServer(connectionString), ServiceLifetime.Transient);
 
         builder.Services.AddAutoMapper(typeof(WandProfile).Assembly);
 
@@ -142,12 +155,23 @@ public class Program
 
         app.MapControllers();
 
-        using (var scope = app.Services.CreateScope())
+        //using (var scope = app.Services.CreateScope())
+        //{
+        //    var db = scope.ServiceProvider.GetRequiredService<DataContext>();
+        //    await db.Database.MigrateAsync();
+        //    var seeder = scope.ServiceProvider.GetRequiredService<IWandSeeder>();
+        //    await seeder.Seed();
+        //}
+
+        if (!builder.Environment.IsEnvironment("IntegrationTest"))
         {
-            var db = scope.ServiceProvider.GetRequiredService<DataContext>();
-            await db.Database.MigrateAsync();
-            var seeder = scope.ServiceProvider.GetRequiredService<IWandSeeder>();
-            await seeder.Seed();
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<DataContext>();
+                await db.Database.MigrateAsync();
+                var seeder = scope.ServiceProvider.GetRequiredService<IWandSeeder>();
+                await seeder.Seed();
+            }
         }
 
         //var scope = app.Services.CreateScope();

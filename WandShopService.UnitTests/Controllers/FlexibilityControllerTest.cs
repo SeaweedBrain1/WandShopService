@@ -7,90 +7,90 @@ using WandShop.Domain.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace WandShop.Tests.Controllers
-{
-    public class FlexibilityControllerTests
-    {   
-        private readonly Mock<IFlexibilityService> _mockService;
-        private readonly FlexibilityController _controller;
+namespace WandShopService.UnitTests.Controllers;
+//namespace WandShop.Tests.Controllers
 
-        public FlexibilityControllerTests()
-        {
-            _mockService = new Mock<IFlexibilityService>();
-            _controller = new FlexibilityController(_mockService.Object);
-        }
+public class FlexibilityControllerTests
+{   
+    private readonly Mock<IFlexibilityService> _mockService;
+    private readonly FlexibilityController _controller;
 
-        [Fact]
-        public async Task GetAllFlexibilities_WhenFlexibilitiesExist_ReturnsOkWithList()
-        {
-            var list = new List<Flexibility> { new() { Id = 1, Name = "Soft" } };
-            _mockService.Setup(s => s.GetAllFlexibilitiesAsync()).ReturnsAsync(list);
+    public FlexibilityControllerTests()
+    {
+        _mockService = new Mock<IFlexibilityService>();
+        _controller = new FlexibilityController(_mockService.Object);
+    }
 
-            var result = await _controller.GetAllFlexibilities();
+    [Fact]
+    public async Task GetAllFlexibilities_WhenFlexibilitiesExist_ReturnsOkWithList()
+    {
+        var list = new List<Flexibility> { new() { Id = 1, Name = "Soft" } };
+        _mockService.Setup(s => s.GetAllFlexibilitiesAsync()).ReturnsAsync(list);
 
-            var ok = Assert.IsType<OkObjectResult>(result.Result);
-            Assert.Equal(list, ok.Value);
-        }
+        var result = await _controller.GetAllFlexibilities();
 
-        [Fact]
-        public async Task GetFlexibility_WhenFlexibilityExists_ReturnsOkWithItem()
-        {
-            var flex = new Flexibility { Id = 1, Name = "Firm" };
-            _mockService.Setup(s => s.GetFlexibilityAsync(1)).ReturnsAsync(flex);
+        var ok = Assert.IsType<OkObjectResult>(result.Result);
+        Assert.Equal(list, ok.Value);
+    }
 
-            var result = await _controller.GetFlexibility(1);
+    [Fact]
+    public async Task GetFlexibility_WhenFlexibilityExists_ReturnsOkWithItem()
+    {
+        var flex = new Flexibility { Id = 1, Name = "Firm" };
+        _mockService.Setup(s => s.GetFlexibilityAsync(1)).ReturnsAsync(flex);
 
-            var ok = Assert.IsType<OkObjectResult>(result.Result);
-            Assert.Equal(flex, ok.Value);
-        }
+        var result = await _controller.GetFlexibility(1);
 
-        [Fact]
-        public async Task GetFlexibility_WhenFlexibilityDoesNotExist_ReturnsNotFound()
-        {
-            _mockService.Setup(s => s.GetFlexibilityAsync(999)).ReturnsAsync((Flexibility)null);
+        var ok = Assert.IsType<OkObjectResult>(result.Result);
+        Assert.Equal(flex, ok.Value);
+    }
 
-            var result = await _controller.GetFlexibility(999);
+    [Fact]
+    public async Task GetFlexibility_WhenFlexibilityDoesNotExist_ReturnsNotFound()
+    {
+        _mockService.Setup(s => s.GetFlexibilityAsync(999)).ReturnsAsync((Flexibility)null);
 
-            Assert.IsType<NotFoundResult>(result.Result);
-        }
+        var result = await _controller.GetFlexibility(999);
 
-        [Fact]
-        public async Task AddFlexibility_ValidFlexibility_ReturnsCreatedAt()
-        {
-            var input = new Flexibility { Name = "Stiff" };
-            var created = new Flexibility { Id = 10, Name = "Stiff" };
-            _mockService.Setup(s => s.AddFlexibilityAsync(input)).ReturnsAsync(created);
+        Assert.IsType<NotFoundResult>(result.Result);
+    }
 
-            var result = await _controller.AddFlexibility(input);
+    [Fact]
+    public async Task AddFlexibility_ValidFlexibility_ReturnsCreatedAt()
+    {
+        var input = new Flexibility { Name = "Stiff" };
+        var created = new Flexibility { Id = 10, Name = "Stiff" };
+        _mockService.Setup(s => s.AddFlexibilityAsync(input)).ReturnsAsync(created);
 
-            var action = Assert.IsType<ActionResult<Flexibility>>(result);
-            var createdAt = Assert.IsType<CreatedAtActionResult>(action.Result);
-            Assert.Equal("GetFlexibility", createdAt.ActionName);
-            Assert.Equal(created, createdAt.Value);
-        }
+        var result = await _controller.AddFlexibility(input);
 
-        [Fact]
-        public async Task UpdateFlexibility_IdMismatch_ReturnsBadRequest()
-        {
-            var flex = new Flexibility { Id = 5, Name = "Rigid" };
+        var action = Assert.IsType<ActionResult<Flexibility>>(result);
+        var createdAt = Assert.IsType<CreatedAtActionResult>(action.Result);
+        Assert.Equal("GetFlexibility", createdAt.ActionName);
+        Assert.Equal(created, createdAt.Value);
+    }
 
-            var result = await _controller.UpdateFlexibility(6, flex);
+    [Fact]
+    public async Task UpdateFlexibility_IdMismatch_ReturnsBadRequest()
+    {
+        var flex = new Flexibility { Id = 5, Name = "Rigid" };
 
-            var action = Assert.IsType<ActionResult<Flexibility>>(result);
-            Assert.IsType<BadRequestResult>(action.Result);
-        }
+        var result = await _controller.UpdateFlexibility(6, flex);
 
-        [Fact]
-        public async Task UpdateFlexibility_Valid_ReturnsOkWithUpdated()
-        {
-            var input = new Flexibility { Id = 5, Name = "Springy" };
-            _mockService.Setup(s => s.UpdateFlexibilityAsync(input)).ReturnsAsync(input);
+        var action = Assert.IsType<ActionResult<Flexibility>>(result);
+        Assert.IsType<BadRequestResult>(action.Result);
+    }
 
-            var result = await _controller.UpdateFlexibility(5, input);
+    [Fact]
+    public async Task UpdateFlexibility_Valid_ReturnsOkWithUpdated()
+    {
+        var input = new Flexibility { Id = 5, Name = "Springy" };
+        _mockService.Setup(s => s.UpdateFlexibilityAsync(input)).ReturnsAsync(input);
 
-            var action = Assert.IsType<ActionResult<Flexibility>>(result);
-            var ok = Assert.IsType<OkObjectResult>(action.Result);
-            Assert.Equal(input, ok.Value);
-        }
+        var result = await _controller.UpdateFlexibility(5, input);
+
+        var action = Assert.IsType<ActionResult<Flexibility>>(result);
+        var ok = Assert.IsType<OkObjectResult>(action.Result);
+        Assert.Equal(input, ok.Value);
     }
 }
