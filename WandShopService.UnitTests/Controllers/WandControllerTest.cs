@@ -9,7 +9,6 @@ using WandShopService.Controllers;
 using Xunit;
 
 namespace WandShopService.UnitTests.Controllers;
-//namespace WandShop.Tests.Controllers;
 
 public class WandControllerTests
 {

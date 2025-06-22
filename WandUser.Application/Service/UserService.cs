@@ -13,14 +13,12 @@ namespace WandUser.Application.Service
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        //private readonly IRoleRepository _roleRepository;
         private readonly IPasswordHasher _passwordHasher;
         private readonly IMapper _mapper;
 
-        public UserService(IUserRepository userRepository, /*IRoleRepository roleRepository,*/ IPasswordHasher passwordHasher, IMapper mapper)
+        public UserService(IUserRepository userRepository, IPasswordHasher passwordHasher, IMapper mapper)
         {
             _userRepository = userRepository;
-            //_roleRepository = roleRepository;
             _passwordHasher = passwordHasher;
             _mapper = mapper;
         }
@@ -54,7 +52,6 @@ namespace WandUser.Application.Service
         public async Task<UserDto> GetUserByIdAsync(int userId)
         {
             var user = await _userRepository.GetUserByIdAsync(userId);
-            //return user?.ToUserDto();
             return user != null ? _mapper.Map<UserDto>(user) : null;
         }
 

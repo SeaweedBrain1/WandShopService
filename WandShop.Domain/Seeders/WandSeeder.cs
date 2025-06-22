@@ -20,8 +20,6 @@ namespace WandShop.Domain.Seeders
 
         public async Task Seed()
         {
-            //_context.Wands.RemoveRange(_context.Wands);
-            //await _context.SaveChangesAsync();
 
             if (!_context.Flexibilities.Any())
             {

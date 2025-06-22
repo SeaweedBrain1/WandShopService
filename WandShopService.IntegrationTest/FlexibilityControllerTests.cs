@@ -23,6 +23,11 @@ public class FlexibilityControllerTests : IClassFixture<WebApplicationFactory<Pr
     private readonly HttpClient _client;
     private readonly WebApplicationFactory<Program> _factory;
 
+    private static readonly JsonSerializerOptions _jsonOptions = new JsonSerializerOptions
+    {
+        PropertyNameCaseInsensitive = true
+    };
+
     public FlexibilityControllerTests(WebApplicationFactory<Program> factory)
     {
         _factory = factory.WithWebHostBuilder(builder =>
@@ -30,18 +35,13 @@ public class FlexibilityControllerTests : IClassFixture<WebApplicationFactory<Pr
             builder.UseEnvironment("IntegrationTest");
             builder.ConfigureServices(services =>
             {
-                //var dbContextDescriptor = services.SingleOrDefault(
-                //    d => d.ServiceType == typeof(DbContextOptions<DataContext>));
-                //if (dbContextDescriptor != null)
-                //    services.Remove(dbContextDescriptor);
-
-                //services.AddDbContext<DataContext>(options =>
-                //    options.UseInMemoryDatabase("TestDb_Flexibility"));
-
                 var dbContextOptions = services
-                    .SingleOrDefault(service => service.ServiceType == typeof(DbContextOptions<DataContext>));
+                .SingleOrDefault(service => service.ServiceType == typeof(DbContextOptions<DataContext>));
 
-                services.Remove(dbContextOptions);
+                if (dbContextOptions != null)
+                {
+                    services.Remove(dbContextOptions);
+                }
 
                 services
                     .AddDbContext<DataContext>(options => options.UseInMemoryDatabase("MyDBForTest"));
@@ -68,8 +68,8 @@ public class FlexibilityControllerTests : IClassFixture<WebApplicationFactory<Pr
         response.EnsureSuccessStatusCode();
 
         var responseBody = await response.Content.ReadAsStringAsync();
-        var flexibilities = JsonSerializer.Deserialize<List<Flexibility>>(responseBody,
-            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+        var flexibilities = JsonSerializer.Deserialize<List<Flexibility>>(responseBody, _jsonOptions);
 
         Assert.NotNull(flexibilities);
         Assert.Equal(2, flexibilities.Count);

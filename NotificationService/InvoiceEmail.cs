@@ -31,7 +31,7 @@ namespace NotificationService
 
             try
             {
-                var json = message.Value; // zak³adam ¿e .Value to string z JSON-em
+                var json = message.Value;
                 var order = JsonSerializer.Deserialize<OrderMessage>(json);
 
                 if (order != null)

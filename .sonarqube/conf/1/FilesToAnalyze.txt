@@ -1,9 +1,3 @@
-﻿C:\Users\oskar\source\repos\WandShopService\Cart.Domain\Exceptions\NotFoundException.cs
-C:\Users\oskar\source\repos\WandShopService\Cart.Domain\Migrations\20250524153925_Initial.cs
-C:\Users\oskar\source\repos\WandShopService\Cart.Domain\Migrations\20250524153925_Initial.Designer.cs
-C:\Users\oskar\source\repos\WandShopService\Cart.Domain\Migrations\DataContextModelSnapshot.cs
-C:\Users\oskar\source\repos\WandShopService\Cart.Domain\Models\CartItem.cs
-C:\Users\oskar\source\repos\WandShopService\Cart.Domain\Models\CartUser.cs
-C:\Users\oskar\source\repos\WandShopService\Cart.Domain\Repositories\CartDataContext.cs
-C:\Users\oskar\source\repos\WandShopService\Cart.Domain\Repositories\CartRepository.cs
-C:\Users\oskar\source\repos\WandShopService\Cart.Domain\Repositories\ICartRepository.cs
+﻿C:\Users\oskar\source\repos\WandShopService\WandShop.Infrastructure\Converters\EnumDisplayTypeConverter.cs
+C:\Users\oskar\source\repos\WandShopService\WandShop.Infrastructure\Converters\JsonEnumDisplayConverter.cs
+C:\Users\oskar\source\repos\WandShopService\WandShop.Infrastructure\Converters\StringDisplayConverter.cs

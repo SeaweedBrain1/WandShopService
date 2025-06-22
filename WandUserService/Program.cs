@@ -49,17 +49,6 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = publicKey
     };
 
-    //var jwtConfig = jwtSettings.Get<JwtSettings>();
-    //options.TokenValidationParameters = new TokenValidationParameters
-    //{
-    //    ValidateIssuer = true,
-    //    ValidateAudience = true,
-    //    ValidateLifetime = true,
-    //    ValidateIssuerSigningKey = true,
-    //    ValidIssuer = jwtConfig.Issuer,
-    //    ValidAudience = jwtConfig.Audience,
-    //    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.Key))
-    //};
 });
 
 builder.Services.AddAuthorization(options =>

@@ -78,9 +78,6 @@ namespace WandShopService.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            //var wand = await _wandService.GetWandAsync(id);
-            //wand.Deleted = true;
-            //var result = await _wandService.UpdateAsync(wand);
 
             var result = await _wandService.DeleteWand(id);
 

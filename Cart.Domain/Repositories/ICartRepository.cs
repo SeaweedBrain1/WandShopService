@@ -9,7 +9,6 @@ namespace Cart.Domain.Repositories;
 
 public interface ICartRepository
 {
-    //Task<CartUser> GetOrCreateCartAsync(int userId);
     Task AddItemAsync(int userId, int wandId);
     Task<CartUser?> GetCartAsync(int userId);
     Task<List<CartUser>> GetAllCartsAsync();

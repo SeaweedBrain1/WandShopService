@@ -1,5 +1,4 @@
-﻿C:\Users\oskar\source\repos\WandShopService\TestProject1\Controllers\FlexibilityControllerTest.cs
-C:\Users\oskar\source\repos\WandShopService\TestProject1\Controllers\WandControllerTest.cs
+﻿C:\Users\oskar\source\repos\WandShopService\WandShopService.IntegrationTest\FlexibilityControllerTests.cs
 C:\Users\oskar\.nuget\packages\microsoft.net.test.sdk\17.8.0\build\netcoreapp3.1\Microsoft.NET.Test.Sdk.Program.cs
 C:\Users\oskar\.nuget\packages\microsoft.testplatform.testhost\17.8.0\build\netcoreapp3.1\x64\testhost.exe
 C:\Users\oskar\.nuget\packages\microsoft.testplatform.testhost\17.8.0\build\netcoreapp3.1\x64\testhost.dll

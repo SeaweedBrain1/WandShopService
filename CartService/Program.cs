@@ -33,7 +33,7 @@ var userBaseUrl = builder.Configuration.GetValue<string>("UserService:BaseUrl");
 
 builder.Services.AddHttpClient<IUserServiceClient, UserServiceClient>(client =>
 {
-    client.BaseAddress = new Uri(userBaseUrl); // zmieñ na prawdziwy adres/hostname UserService
+    client.BaseAddress = new Uri(userBaseUrl);
 })
 .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
 {

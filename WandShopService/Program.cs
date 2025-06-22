@@ -25,7 +25,6 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        //builder.Services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("TestDb"), ServiceLifetime.Transient);
 
         if (builder.Environment.IsEnvironment("IntegrationTest"))
         {
@@ -39,10 +38,6 @@ public class Program
                 options.UseSqlServer(connectionString), ServiceLifetime.Transient);
         }
 
-
-        //var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
-        //builder.Services.AddDbContext<DataContext>(options =>
-        //    options.UseSqlServer(connectionString), ServiceLifetime.Transient);
 
         builder.Services.AddAutoMapper(typeof(WandProfile).Assembly);
 
@@ -90,7 +85,6 @@ public class Program
         builder.Services.AddScoped<IWandService, WandService>();
         builder.Services.AddScoped<IFlexibilityService, FlexibilityService>();
 
-        //builder.Services.AddControllers();
         builder.Services.AddControllers()
             .AddJsonOptions(options =>
             {
@@ -135,7 +129,6 @@ public class Program
 
         builder.Services.AddScoped<IWandSeeder, WandSeeder>();
 
-        //builder.WebHost.UseUrls("http://*:8080");
 
 
         var app = builder.Build();
@@ -155,13 +148,6 @@ public class Program
 
         app.MapControllers();
 
-        //using (var scope = app.Services.CreateScope())
-        //{
-        //    var db = scope.ServiceProvider.GetRequiredService<DataContext>();
-        //    await db.Database.MigrateAsync();
-        //    var seeder = scope.ServiceProvider.GetRequiredService<IWandSeeder>();
-        //    await seeder.Seed();
-        //}
 
         if (!builder.Environment.IsEnvironment("IntegrationTest"))
         {
@@ -174,9 +160,6 @@ public class Program
             }
         }
 
-        //var scope = app.Services.CreateScope();
-        //var seeder = scope.ServiceProvider.GetRequiredService<IWandSeeder>();
-        //await seeder.Seed();
 
         app.Run();
     }

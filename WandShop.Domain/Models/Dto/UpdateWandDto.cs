@@ -16,17 +16,6 @@ public class UpdateWandDto
     public decimal? Price { get; set; }
     public bool? Deleted { get; set; }
 
-    //public Wand ToWand(Wand wand)
-    //{
-    //    if (WoodType.HasValue) wand.WoodType = WoodType.Value;
-    //    if (Length.HasValue) wand.Length = Length.Value;
-    //    if (Core.HasValue) wand.Core = Core.Value;
-    //    if (Flexibility != null) wand.Flexibility = Flexibility;
-    //    if (Price.HasValue) wand.Price = Price.Value;
-    //    if (Deleted.HasValue) wand.Deleted = Deleted.Value;
-
-    //    return wand;
-    //}
 }
 
 

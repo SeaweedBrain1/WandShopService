@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace WandShopService.UnitTests.Controllers;
-//namespace WandShop.Tests.Controllers
 
 public class FlexibilityControllerTests
 {   

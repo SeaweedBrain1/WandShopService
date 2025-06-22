@@ -26,7 +26,6 @@ public class EnumDisplayTypeConverter<T> : TypeConverter where T : struct, Enum
         if (string.IsNullOrWhiteSpace(input))
             throw new ArgumentException("Value cannot be null or whitespace.");
 
-        // Usuwa spacje i porównuje z nazwami enumów
         var normalized = Regex.Replace(input, @"\s+", "");
 
         if (Enum.TryParse<T>(normalized, ignoreCase: true, out var result))

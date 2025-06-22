@@ -1,3 +1,4 @@
-﻿C:\Users\oskar\source\repos\WandShopService\WandShop.Infrastructure\Converters\EnumDisplayTypeConverter.cs
-C:\Users\oskar\source\repos\WandShopService\WandShop.Infrastructure\Converters\JsonEnumDisplayConverter.cs
-C:\Users\oskar\source\repos\WandShopService\WandShop.Infrastructure\Converters\StringDisplayConverter.cs
+﻿C:\Users\oskar\source\repos\WandShopService\.env
+C:\Users\oskar\source\repos\WandShopService\docker-compose.override.yml
+C:\Users\oskar\source\repos\WandShopService\docker-compose.yml
+C:\Users\oskar\source\repos\WandShopService\.dockerignore

@@ -20,15 +20,13 @@ public class WandService : IWandService
     private IWandRepository _wandRepository;
     private IFlexibilityRepository _flexibilityRepository;
     private readonly IMapper _mapper;
-    //private readonly IMemoryCache _cache;
     private readonly IDatabase _redisDb;
 
-    public WandService(IWandRepository wandRepository, IFlexibilityRepository flexibilityRepository, IMapper mapper/*, IMemoryCache cache*/)
+    public WandService(IWandRepository wandRepository, IFlexibilityRepository flexibilityRepository, IMapper mapper)
     {
         _wandRepository = wandRepository;
         _flexibilityRepository = flexibilityRepository;
         _mapper = mapper;
-        //_cache = cache;
         var redis = ConnectionMultiplexer.Connect("redis:6379");
         _redisDb = redis.GetDatabase();
     }
@@ -135,7 +133,6 @@ public class WandService : IWandService
         }
 
 
-        //var result = await _repository.GetWandAsync(id);
 
         return wand;
     }
